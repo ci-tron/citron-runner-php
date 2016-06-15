@@ -1,0 +1,10 @@
+#!/usr/bin/env php
+<?php
+// command.php
+
+require 'vendor/autoload.php';
+
+use Citron\RunnerApplication;
+
+$application = new SimpleRunnerApplication(__DIR__);
+$application->run();
