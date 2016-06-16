@@ -8,7 +8,7 @@
  * For the full license, take a look to the LICENSE file
  * on the root directory of this project
  */
-namespace Citron\SimpleRunner\Exception;
+namespace Citron\Runner\Common\Exception;
 
 class InvalidMessageException extends \Exception
 {

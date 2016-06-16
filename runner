@@ -4,7 +4,7 @@
 
 require 'vendor/autoload.php';
 
-use Citron\RunnerApplication;
+use Citron\Runner\RunnerApplication;
 
-$application = new SimpleRunnerApplication(__DIR__);
+$application = new RunnerApplication(__DIR__);
 $application->run();

@@ -8,7 +8,7 @@
  * on the root directory of this project
  */
 
-namespace Citron\SimpleRunner\Client;
+namespace Citron\Runner\Common\Client;
 
 
 class Message

@@ -8,9 +8,10 @@
  * on the root directory of this project
  */
 
-namespace Citron\SimpleRunner\Client;
+namespace Citron\Runner\SimpleRunner\Client;
 
 
+use Citron\Runner\Common\Client\MessageFactory;
 use Ratchet\Client\WebSocket;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;

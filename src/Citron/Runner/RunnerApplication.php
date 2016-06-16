@@ -1,8 +1,8 @@
 <?php
 
-namespace Citron;
+namespace Citron\Runner;
 
-use Citron\SimpleRunner\Command\SimpleRunnerCommand;
+use Citron\Runner\SimpleRunner\Command\SimpleRunnerCommand;
 use Symfony\Component\Console\Application;
 
 /**
@@ -13,7 +13,7 @@ use Symfony\Component\Console\Application;
  * For the full license, take a look to the LICENSE file
  * on the root directory of this project
  */
-class SimpleRunnerApplication extends Application
+class RunnerApplication extends Application
 {
     private $workingDirectory;
 
