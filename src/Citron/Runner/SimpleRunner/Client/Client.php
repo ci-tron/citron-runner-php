@@ -39,23 +39,25 @@ class Client extends AbstractClient
         chdir($workingDir . '/NeklandCiTestFolder');
 
 
+        $success = true;
         foreach ($script as $process) {
             $this->output->writeln('<info>'.$process.'</info>');
             $process = new Process($process);
             $process->run([$this, 'onRunningProcess']);
             $process->wait([$this, 'onRunningProcess']);
+            
+            if (!$process->isSuccessful()) {
+                $success = false;
+                break;
+            }
         }
 
-        $this->connection->send('RUNNER:process:{"finished": true}');
+        $this->connection->send('RUNNER:process:{"finished": true, "success": ' . ($success ? 'true': 'false') . '}');
         $this->output->writeln('<info>Process done !</info>');
     }
 
     public function onRunningProcess($type, $buffer)
     {
-        if (Process::ERR === $type) {
-            $this->output->writeln('<error>ERR: ' . $buffer . '</error>');
-            return;
-        }
         $this->connection->send('RUNNER:process:{"finished": false, "log": "'.addslashes($buffer).'"}');
     }
 }
