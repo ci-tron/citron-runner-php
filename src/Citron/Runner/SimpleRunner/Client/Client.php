@@ -11,47 +11,15 @@
 namespace Citron\Runner\SimpleRunner\Client;
 
 
+use Citron\Runner\Common\Client\AbstractClient;
 use Citron\Runner\Common\Client\MessageFactory;
 use Ratchet\Client\WebSocket;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 
-class Client
+class Client extends AbstractClient
 {
-    /**
-     * @var WebSocket
-     */
-    private $connection;
-
-    /**
-     * @var OutputInterface
-     */
-    private $output;
-
-    public function __construct(WebSocket $connection, OutputInterface $output)
-    {
-        $this->connection = $connection;
-        $this->connection->on('message', [$this, 'onMessage']);
-        $this->output = $output;
-
-        $connection->send('RUNNER:init:');
-    }
-
-    public function onMessage(string $message)
-    {
-        $message = MessageFactory::createMessage($message);
-
-        switch ($message->getAction()) {
-            case 'run':
-                $this->run($message->getContent()['repo'], $message->getContent()['script']);
-                break;
-            case 'shutdown':
-                $this->connection->close();
-                break;
-        }
-    }
-
     public function run(string $repo, string $script)
     {
         $filesystem = new Filesystem();
