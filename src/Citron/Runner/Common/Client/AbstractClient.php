@@ -51,5 +51,5 @@ abstract class AbstractClient
         }
     }
 
-    public abstract function run(string $repo, string $script);
+    public abstract function run(string $repo, array $script);
 }
