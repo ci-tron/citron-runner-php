@@ -53,6 +53,6 @@ class Client extends AbstractClient
             $this->output->writeln('<danger>ERR: ' . $buffer . '</danger>');
             return;
         }
-        $this->connection->emit('RUNNER:process:{"finished": false, "content": "'.addslashes($buffer).'"}');
+        $this->connection->emit('RUNNER:process:{"finished": false, "log": "'.addslashes($buffer).'"}');
     }
 }
