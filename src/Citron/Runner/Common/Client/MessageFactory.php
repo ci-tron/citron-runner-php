@@ -11,7 +11,7 @@
 namespace Citron\Runner\Common\Client;
 
 
-use Citron\SimpleRunner\Exception\InvalidMessageException;
+use Citron\Runner\Common\Exception\InvalidMessageException;
 
 class MessageFactory
 {

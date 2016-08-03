@@ -24,7 +24,7 @@ class Client extends AbstractClient
     {
         $this->output->writeln('<info>Running...</info>');
         $filesystem = new Filesystem();
-        $workingDir = sys_get_temp_dir() . '/nekland_ci';
+        $workingDir = sys_get_temp_dir() . '/nekland_ci_' . uniqid();
 
         if ($filesystem->exists($workingDir)) {
             $filesystem->remove($workingDir);
@@ -54,10 +54,13 @@ class Client extends AbstractClient
 
         $this->connection->send('RUNNER:process:{"finished": true, "success": ' . ($success ? 'true': 'false') . '}');
         $this->output->writeln('<info>Process done !</info>');
+
+        $filesystem->remove($workingDir);
     }
 
     public function onRunningProcess($type, $buffer)
     {
-        $this->connection->send('RUNNER:process:{"finished": false, "log": "'.addslashes($buffer).'"}');
+        $jsonArray = ['finished' => false, 'log' => $buffer];
+        $this->connection->send('RUNNER:process:'.json_encode($jsonArray).'');
     }
 }

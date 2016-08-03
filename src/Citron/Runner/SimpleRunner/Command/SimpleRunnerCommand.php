@@ -29,6 +29,9 @@ class SimpleRunnerCommand extends Command
     {
         \Ratchet\Client\connect('ws://127.0.0.1:8282/runner')->then(function($conn) use ($output) {
             $client = new Client($conn, $output);
+            $conn->on('close', function($code = null, $reason = null) {
+                echo "Connection closed ({$code} - {$reason})\n";
+            });
 
         }, function ($e) {
             echo "Could not connect: {$e->getMessage()}\n";
